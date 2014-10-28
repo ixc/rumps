@@ -6,7 +6,7 @@
 # License: BSD, see LICENSE for details.
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-_NOTIFICATIONS = True
+_NOTIFICATIONS = False
 try:
     from Foundation import NSUserNotification, NSUserNotificationCenter
 except ImportError:
@@ -86,6 +86,7 @@ def notification(title, subtitle, message, data=None, sound=True):
     :param sound: whether the notification should make a noise when it arrives.
     """
     if not _NOTIFICATIONS:
+        return
         raise RuntimeError('Mac OS X 10.8+ is required to send notifications')
     if data is not None and not isinstance(data, Mapping):
         raise TypeError('notification data must be a mapping')
